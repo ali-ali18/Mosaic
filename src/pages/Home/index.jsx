@@ -10,15 +10,23 @@ export default function Home() {
 	const [fotoAleatoria, setFotoAleatoria] = useState([]);
 
 	useEffect(() => {
-		api
-			.get('photos/random', { params: { count: 20 } })
-			.then((resposta) => {
-				setFotoAleatoria(resposta.data);
-				console.log(resposta.data);
-			})
-			.catch((erro) => {
-				console.log(erro);
-			});
+		const armazenaFotos = sessionStorage.getItem('fotosAleatorias');
+		if (armazenaFotos) {
+			setFotoAleatoria(JSON.parse(armazenaFotos));
+		} else {
+			api
+				.get('photos/random', { params: { count: 20 } })
+				.then((resposta) => {
+					setFotoAleatoria(resposta.data);
+					sessionStorage.setItem(
+						'fotosAleatorias',
+						JSON.stringify(resposta.data),
+					);
+				})
+				.catch((erro) => {
+					console.log(erro);
+				});
+		}
 	}, []);
 
 	return (
