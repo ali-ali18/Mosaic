@@ -3,6 +3,8 @@ import Home from "../pages/Home";
 import Header from "../components/Header";
 import PaginaDeBuscas from "../pages/Buscas";
 import FotosFull from "../pages/fotosFull";
+import Photos from "../pages/Photos";
+import Collection from "../pages/Collection";
 
 export default function Rotas () {
     return(
@@ -10,8 +12,11 @@ export default function Rotas () {
             <Header/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                <Route path="/search" element={<PaginaDeBuscas/>}/>
+                <Route path="/photos" element={<Photos/>}/>
                 <Route path="/photos/:id" element={<FotosFull/>}/>
+                <Route path="/search" element={<PaginaDeBuscas/>}/>
+                <Route path="/collections" element={<Collection/>}/>
+                {/* <Route path="/collections/:id" element={<CollectionFull/>}/> */}
             </Routes>
         </BrowserRouter>
     )

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import api from '../../Api';
 import CardsFotos from '../../components/Main/CardsDeFotos';
 import ContainerImgs from '../../components/Main/ContainerImgs';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
 	const [fotoAleatoria, setFotoAleatoria] = useState([]);
@@ -53,9 +54,16 @@ export default function Home() {
 							BorderColor='border-gray-600'
 							BorderWidth='border-2'
 							hoverColor='hover:bg-slate-300 hover:text-black'
-						>
-							Inspiração
-						</BotaoCards>
+							desk='Fotos'
+							to='/photos'
+						/>
+						<BotaoCards
+							BorderColor='border-gray-600'
+							BorderWidth='border-2'
+							hoverColor='hover:bg-slate-300 hover:text-black'
+							desk='Coleções'
+							to='/collections'
+						/>
 					</div>
 				</CardsPrincipal>
 			</div>
@@ -63,6 +71,7 @@ export default function Home() {
 				<ContainerImgs>
 					{fotoAleatoria.map((foto) => (
 						<CardsFotos
+							LinkFotos='photos'
 							key={foto.id}
 							altFoto={foto.alt_description}
 							caminhoFoto={foto.urls.small}

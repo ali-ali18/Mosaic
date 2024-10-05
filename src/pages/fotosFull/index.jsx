@@ -58,6 +58,7 @@ export default function FotosFull() {
 							caminhoFoto={sugestao.urls.small}
 							altFoto={sugestao.alt_description}
 							id={sugestao.id}
+							LinkFotos='photos'
 						/>
 					))}
 				</ContainerImgs>

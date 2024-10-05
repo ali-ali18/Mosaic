@@ -1,15 +1,20 @@
+import { Link } from 'react-router-dom';
+
 export default function BotaoCards({
-	children,
+	to,
 	BorderColor,
 	BgColor,
 	ColorText,
 	BorderWidth,
 	hoverColor,
+	desk,
 }) {
 	return (
-		<button
+		<Link
+			to={to}
 			className={`
 				p-4 font-medium w-36 
+				text-center
 				${BgColor} 
 				${ColorText} 
 				rounded-full 
@@ -17,10 +22,11 @@ export default function BotaoCards({
 				${BorderWidth} 
 				${hoverColor}
 				transition-colors duration-300
+				block
 				`}
 			type='button'
 		>
-			{children}
-		</button>
+			{desk}
+		</Link>
 	);
 }
