@@ -31,7 +31,7 @@ export default function Home() {
 	}, []);
 
 	return (
-		<main className='mx-auto w-full max-w-7xl mt-16 '>
+		<main className='mx-auto w-full max-w-7xl sm:mt-16 mt-0 bg-gray-100'>
 			{/* Cards de inicio */}
 			<div className='xl:flex gap-5 text-black h-80'>
 				{/* Card 1 */}

@@ -29,7 +29,7 @@ export default function PaginaDeBuscas() {
 	}, [busca]);
 
 	return (
-		<main className='mx-auto w-full max-w-7xl mt-16 '>
+		<main className='mx-auto w-full max-w-7xl sm:mt-16 mt-8 bg-gray-100'>
             {carregamento && <h1>Carregando...</h1>}
             {erro && <p>{erro}</p>}
 			<ContainerImgs>
@@ -39,6 +39,7 @@ export default function PaginaDeBuscas() {
                     altFoto={foto.alt_description}
                     caminhoFoto={foto.urls.small}
                     id={foto.id}
+					LinkFotos='photos'
                     />
                 ))}
             </ContainerImgs>

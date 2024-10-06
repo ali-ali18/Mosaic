@@ -68,7 +68,7 @@ export default function Photos() {
 	}
 
 	return (
-		<div className='mx-auto w-full max-w-7xl mt-16'>
+		<div className='mx-auto w-full max-w-7xl sm:mt-16 mt-8 bg-gray-100'>
 			<ContainerImgs>
 				{photos.map((photo) => (
 					<CardsFotos

@@ -28,7 +28,7 @@ export default function CardColection({
 
 				<div className='p-4'>
 					<h3 className='font-semibold text-lg mb-2'>{titleCollection}</h3>
-					<span className='text-gray-500'>{totalPhotos}</span>
+					<span className='text-gray-500'>{totalPhotos} imagens</span>
 				</div>
 			</a>
 		</div>
