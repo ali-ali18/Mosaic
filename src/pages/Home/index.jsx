@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import api from '../../Api';
 import CardsFotos from '../../components/Main/CardsDeFotos';
 import ContainerImgs from '../../components/Main/ContainerImgs';
-import { Link } from 'react-router-dom';
 
 export default function Home() {
 	const [fotoAleatoria, setFotoAleatoria] = useState([]);
@@ -31,7 +30,7 @@ export default function Home() {
 	}, []);
 
 	return (
-		<main className='mx-auto w-full max-w-7xl sm:mt-16 mt-0 bg-gray-100'>
+		<main className='mx-auto w-full max-w-7xl sm:mt-16 mt-0 sm:bg-white bg-gray-100 sm:mb-4'>
 			{/* Cards de inicio */}
 			<div className='xl:flex gap-5 text-black h-80'>
 				{/* Card 1 */}
