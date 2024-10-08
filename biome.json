@@ -12,7 +12,8 @@
 				"useConst": "warn",
 				"useImportType": "warn",
 				"noArguments": "error",
-				"noNamespaceImport": "error"
+				"noNamespaceImport": "error",
+				"noCommaOperator": "off"
 			},
 			"correctness": {
 				"useExhaustiveDependencies": "off"

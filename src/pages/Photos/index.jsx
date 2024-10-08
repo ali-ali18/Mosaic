@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import api from '../../Api';
 import ContainerImgs from '../../components/Main/ContainerImgs';
 import CardsFotos from '../../components/Main/CardsDeFotos';
+import { FaArrowUp } from 'react-icons/fa';
 
 export default function Photos() {
 	const [photos, setPhotos] = useState([]);
 	const [erro, setErro] = useState(null);
 	const [carregando, setCarregando] = useState(false);
 	const [pagina, setPagina] = useState(1);
+	const [topo, setTopo] = useState(false);
 
 	const carregaMaisFotos = async (paginaAtual) => {
 		try {
@@ -21,7 +23,9 @@ export default function Photos() {
 
 			// Armazenar no sessionStorage mesclando com fotos anteriores
 			const fotosArmazenadas = sessionStorage.getItem('photos');
-			const fotosAnteriores = fotosArmazenadas ? JSON.parse(fotosArmazenadas) : [];
+			const fotosAnteriores = fotosArmazenadas
+				? JSON.parse(fotosArmazenadas)
+				: [];
 			const novasFotos = [...fotosAnteriores, ...resposta.data];
 			sessionStorage.setItem('photos', JSON.stringify(novasFotos));
 
@@ -51,6 +55,12 @@ export default function Photos() {
 			if (topoScroll + alturaAtual >= alturaScroll - 100 && !carregando) {
 				setPagina((proximaPagina) => proximaPagina + 1);
 			}
+
+			if (topoScroll > 300) {
+				setTopo(true);
+			} else {
+				setTopo(false);
+			}
 		};
 
 		window.addEventListener('scroll', handleScroll);
@@ -63,6 +73,13 @@ export default function Photos() {
 		}
 	}, [pagina]); // Carrega mais fotos quando a página aumenta
 
+	function scrollTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
+	}
+
 	if (erro) {
 		return <p>{erro}</p>;
 	}
@@ -70,17 +87,42 @@ export default function Photos() {
 	return (
 		<div className='mx-auto w-full max-w-7xl sm:mt-16 mt-8 bg-gray-100'>
 			<ContainerImgs>
-				{photos.map((photo) => (
-					<CardsFotos
-						key={photo.id}
-						altFoto={photo.alt_description}
-						caminhoFoto={photo.urls.small}
-						id={photo.id}
-						LinkFotos='photos'
-					/>
-				))}
+				{photos
+					.filter(
+						(photos, index, self) =>
+							index === self.findIndex((p) => p.id === photos.id),
+					)
+					.map((photo) => (
+						<CardsFotos
+							key={photo.id}
+							altFoto={photo.alt_description}
+							caminhoFoto={photo.urls.small}
+							id={photo.id}
+							LinkFotos='photos'
+						/>
+					))}
 			</ContainerImgs>
 			{carregando && <p>Carregando...</p>}
+
+			{topo && (
+				<button
+					type='button'
+					onClick={scrollTop}
+					className='fixed 
+		bottom-8 
+		right-8 
+		bg-blue-500 
+		text-white 
+		p-2
+		rounded-full 
+		hover:bg-blue-600 
+		transition-all 
+		duration-300
+		'
+				>
+					<FaArrowUp size={35} />
+				</button>
+			)}
 		</div>
 	);
 }

@@ -8,6 +8,7 @@ import ContainerImgs from '../../components/Main/ContainerImgs';
 
 export default function Home() {
 	const [fotoAleatoria, setFotoAleatoria] = useState([]);
+	const [erro, setErro] = useState(null);
 
 	useEffect(() => {
 		const armazenaFotos = sessionStorage.getItem('fotosAleatorias');
@@ -24,10 +25,12 @@ export default function Home() {
 					);
 				})
 				.catch((erro) => {
-					console.log(erro);
+					setErro(`Ocorreu um erro inesperado ${erro}`)
 				});
 		}
 	}, []);
+
+	if (erro) return <p>{erro}</p>
 
 	return (
 		<main className='mx-auto w-full max-w-7xl sm:mt-16 mt-0 sm:bg-white bg-gray-100 sm:mb-4'>

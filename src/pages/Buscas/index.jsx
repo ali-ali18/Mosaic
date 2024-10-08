@@ -22,27 +22,31 @@ export default function PaginaDeBuscas() {
 					setCarregamento(false);
 				})
 				.catch((erro) => {
-					setErro('Impossivel carregar as imagens agora');
+					setErro(`Ocorreu um erro inesperado: ${erro}`);
 					setCarregamento(false);
 				});
 		}
 	}, [busca]);
 
+	if (erro) {
+		return toast.error(`Ocorreu um erro inesperado: ${erro}`);
+	}
+
 	return (
 		<main className='mx-auto w-full max-w-7xl sm:mt-16 mt-8 bg-gray-100'>
-            {carregamento && <h1>Carregando...</h1>}
-            {erro && <p>{erro}</p>}
+			{carregamento && <h1>Carregando...</h1>}
+			{erro && <p>{erro}</p>}
 			<ContainerImgs>
-                {resultado.map((foto) => (
-                    <CardsFotos 
-                    key={foto.id} 
-                    altFoto={foto.alt_description}
-                    caminhoFoto={foto.urls.small}
-                    id={foto.id}
-					LinkFotos='photos'
-                    />
-                ))}
-            </ContainerImgs>
+				{resultado.map((foto) => (
+					<CardsFotos
+						key={foto.id}
+						altFoto={foto.alt_description}
+						caminhoFoto={foto.urls.small}
+						id={foto.id}
+						LinkFotos='photos'
+					/>
+				))}
+			</ContainerImgs>
 		</main>
 	);
 }

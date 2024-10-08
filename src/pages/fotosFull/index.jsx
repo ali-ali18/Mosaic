@@ -4,6 +4,7 @@ import api from '../../Api';
 import ContainerFoto from './FotoDestaque';
 import ContainerImgs from '../../components/Main/ContainerImgs';
 import CardsFotos from '../../components/Main/CardsDeFotos';
+import { toast } from 'react-toastify';
 
 export default function FotosFull() {
 	const { id } = useParams();
@@ -12,6 +13,7 @@ export default function FotosFull() {
 	const [erro, setErro] = useState(null);
 	const [sugestoes, setSugestoes] = useState([]);
 
+	// Requisição para buscar a foto por ID
 	useEffect(() => {
 		setCarregando(true);
 		api
@@ -21,11 +23,13 @@ export default function FotosFull() {
 				setCarregando(false);
 			})
 			.catch((erro) => {
-				setErro('Um erro inesperado aconteceu, tente novamente em breve');
+				const mensagemErro = 'Um erro inesperado aconteceu, tente novamente em breve';
+				setErro(mensagemErro);
 				setCarregando(false);
 			});
 	}, [id]);
 
+	// Requisição para buscar sugestões de fotos
 	useEffect(() => {
 		api
 			.get('/photos/random', { params: { count: 6 } })
@@ -33,13 +37,18 @@ export default function FotosFull() {
 				setSugestoes(resposta.data);
 			})
 			.catch((erro) => {
-				alert(`Erro ao carregar as sugestões: ${erro}`);
+				const mensagemErroSugestoes = `Erro ao carregar as sugestões: ${erro}`;
+				setErro(mensagemErroSugestoes);
 			});
 	}, [id]);
 
+	// Exibir um loader enquanto carrega os dados
 	if (carregando) return <p>Carregando...</p>;
+
+	// Exibir mensagem de erro se houver um erro
 	if (erro) return <p>{erro}</p>;
 
+	// Renderizar a foto e as sugestões caso não haja erro ou carregamento
 	return (
 		<aside>
 			{/* Estrutura flexível para alinhar a imagem em destaque e os cards */}
